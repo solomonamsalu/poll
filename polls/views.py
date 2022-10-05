@@ -1,6 +1,4 @@
 from multiprocessing import context
-from re import S
-from this import s
 from django.shortcuts import render
 from django.http import HttpResponse,Http404
 from polls.models import Questions
