@@ -1,5 +1,5 @@
 from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse,Http404
 from polls.models import Questions
 from django.template import loader
@@ -13,14 +13,12 @@ def index(request):
     # return HttpResponse(template.render(context,request))
     return  render (request, 'polls/index.html', context)
 def detail(request, question_id):
-        try:
-            question=Questions.objects.get(pk=question_id)
-        except Questions.DoesNotExist:
-                raise Http404("Question does not exist" )
-        context={
-            "question":question
-        }
-        return render(request,'polls/detail.html',context)
+    question=Questions.objects.get(pk=question_id)
+
+    context={
+     "question":question
+    }
+    return render(request,'polls/detail.html',context)
 def results(request,question_id):
     response="you are looking at the result of %s." 
     return HttpResponse(response % question_id)
