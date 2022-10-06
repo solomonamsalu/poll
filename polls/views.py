@@ -4,14 +4,19 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from polls.models import Questions,Choice
 from django.template import loader
 from django.urls import reverse
-
-def index(request):
-    latest_question_list=Questions.objects.order_by('pub_date')[:5]
-    # template=loader.get_template("polls/index.html")
-    context={
-        "latest_question_list":latest_question_list,
-    }
-    return  render (request, 'polls/index.html', context)
+from django.views import generic
+class IndexView(generic.ListView):
+    template_name="polls/index.html"
+    context_object_name='question'
+    def get_queryset(self):
+        return Questions.objects.order_by('id')
+# def index(request):
+#     latest_question_list=Questions.objects.order_by('pub_date')[:5]
+    
+#     context={
+#         "latest_question_list":latest_question_list,
+#     }
+#     return  render (request, 'polls/index.html', context)
 def detail(request, question_id):
     question=Questions.objects.get(pk=question_id)
 

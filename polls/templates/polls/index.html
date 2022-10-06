@@ -1,6 +1,6 @@
-{%if latest_question_list %}
+{%if question%}
 <ul>
-{%for q in latest_question_list%}
+{%for q in question%}
 <li><a href="polls/{{q.id}}/">{{q.question_text}}</a>
 </li>
 {%endfor%}
