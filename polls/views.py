@@ -20,8 +20,11 @@ def detail(request, question_id):
     }
     return render(request,'polls/detail.html',context)
 def results(request,question_id):
-    response="you are looking at the result of %s." 
-    return HttpResponse(response % question_id)
+    question = get_object_or_404(Questions, pk=question_id)
+    context={
+        "question":question
+    }
+    return render(request,'polls/result.html',context)
 def vote(request, question_id):
     question = get_object_or_404(Questions, pk=question_id)
     try:
