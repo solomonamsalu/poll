@@ -10,20 +10,16 @@ class IndexView(generic.ListView):
     context_object_name='question'
     def get_queryset(self):
         return Questions.objects.order_by('id')
-# def index(request):
-#     latest_question_list=Questions.objects.order_by('pub_date')[:5]
-    
-#     context={
-#         "latest_question_list":latest_question_list,
-#     }
-#     return  render (request, 'polls/index.html', context)
-def detail(request, question_id):
-    question=Questions.objects.get(pk=question_id)
+class DetailView(generic.DetailView):
+    model=Questions
+    template_name="polls/detail.html"
+# def detail(request, question_id):
+#     question=Questions.objects.get(pk=question_id)
 
-    context={
-     "question":question
-    }
-    return render(request,'polls/detail.html',context)
+#     context={
+#      "question":question
+#     }
+#     return render(request,'polls/detail.html',context)
 def results(request,question_id):
     question = get_object_or_404(Questions, pk=question_id)
     context={
