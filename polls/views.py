@@ -10,17 +10,7 @@ from django.utils import timezone
 class IndexView(generic.ListView):
     model=Questions
     template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
-
-        # def get_queryset(self):
-        #     """Return the last five published questions."""
-        #     return Questions.objects.order_by('-pub_date')[:5]
-    # template_name="polls/index.html"
-    # context_object_name='question'
-    def get_queryset(self):
-        return timezone.now()
-        return Questions.objects.filter(pub_date__lte=timezone.now()).order_by('pub_date')[:5]
-
+    # context_object_name = 'latest_question_list'
 class DetailView(generic.DetailView):
     model=Questions
     template_name="polls/detail.html"

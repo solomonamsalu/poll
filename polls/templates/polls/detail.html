@@ -10,6 +10,7 @@
         {%if error_message%} <p><strong>{{error_message}}</strong></p>
         {%endif%}
         {% for choice in questions.choice_set.all %}
+        <p>choice{{forloop.counter}}</p>
         <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
         <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label>
         <br>{%endfor%}
