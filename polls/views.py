@@ -1,22 +1,22 @@
 from multiprocessing import context
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse,Http404,HttpResponseRedirect
-from polls.models import Questions,Choice
+from polls.models import Question,Choice
 from django.template import loader
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 # class IndexView(generic.ListView):
 class IndexView(generic.ListView):
-    model=Questions
+    model=Question
     template_name = 'polls/index.html'
     # context_object_name = 'latest_question_list'
 class DetailView(generic.DetailView):
-    model=Questions
+    model=Question
     template_name="polls/detail.html"
  
 class ResultView(generic.DetailView):
-    model=Questions
+    model=Question
     template_name="polls/result.html"
 
 # def results(request,question_id):
@@ -26,7 +26,7 @@ class ResultView(generic.DetailView):
 #     }
 #     return render(request,'polls/result.html',context)
 def vote(request, question_id):
-    question = get_object_or_404(Questions, pk=question_id)
+    question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
